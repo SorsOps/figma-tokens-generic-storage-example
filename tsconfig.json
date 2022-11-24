@@ -1,0 +1,37 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"noImplicitAny": false,
+		"removeComments": false,
+		"noLib": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"target": "es5",
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"outDir": "./dist",
+		"skipLibCheck": true,
+		"lib": [
+			"es5",
+			"es6",
+			"es2017",
+			"dom"
+		],
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"importHelpers": false,
+		"types": [
+			"jest"
+		],
+		"paths": {}
+	},
+	"include": [
+		"./src",
+		"./tests"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}

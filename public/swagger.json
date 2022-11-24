@@ -1,0 +1,328 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Record_string.any_": {
+				"properties": {},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"Tokens": {
+				"$ref": "#/components/schemas/Record_string.any_"
+			},
+			"PutResponse": {
+				"properties": {
+					"values": {
+						"$ref": "#/components/schemas/Tokens"
+					},
+					"$themes": {
+						"$ref": "#/components/schemas/Tokens"
+					},
+					"version": {
+						"type": "string",
+						"description": "The version of the plugin that pushed the values"
+					},
+					"updatedAt": {
+						"type": "number",
+						"format": "double",
+						"description": "The date submitted in unix time"
+					}
+				},
+				"required": [
+					"values",
+					"version",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"ValidateErrorJSON": {
+				"properties": {
+					"message": {
+						"type": "string",
+						"enum": [
+							"Validation failed"
+						],
+						"nullable": false
+					},
+					"details": {
+						"properties": {},
+						"additionalProperties": {},
+						"type": "object"
+					}
+				},
+				"required": [
+					"message",
+					"details"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"PutRequest": {
+				"properties": {
+					"values": {
+						"$ref": "#/components/schemas/Tokens",
+						"description": "The token set"
+					},
+					"$themes": {
+						"$ref": "#/components/schemas/Tokens",
+						"description": "The themes associated with the token set"
+					},
+					"updatedAt": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						],
+						"description": "The time at which the changes were made"
+					},
+					"version": {
+						"type": "string",
+						"description": "The version of the plugin that pushed the values"
+					}
+				},
+				"required": [
+					"values",
+					"updatedAt",
+					"version"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"PostResponse": {
+				"properties": {
+					"created": {
+						"type": "boolean",
+						"description": "Whether the token set was created or reused"
+					},
+					"updatedAt": {
+						"type": "number",
+						"format": "double",
+						"description": "When the set was created"
+					}
+				},
+				"required": [
+					"created",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"PostRequest": {
+				"properties": {
+					"values": {
+						"$ref": "#/components/schemas/Tokens",
+						"description": "The initially populated token set"
+					},
+					"$themes": {
+						"$ref": "#/components/schemas/Tokens",
+						"description": "The themes associated with the token set"
+					},
+					"version": {
+						"type": "string",
+						"description": "The version of the plugin that pushed the values"
+					},
+					"updatedAt": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						],
+						"description": "The time at which the changes were made"
+					}
+				},
+				"required": [
+					"version"
+				],
+				"type": "object",
+				"additionalProperties": true
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "figma-tokens-generic-storage-example",
+		"version": "1.0.0",
+		"description": "Example of a generic versioned storage endpoint for Figma Tokens",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {
+			"name": "Andrew@x82.io"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/{tokenSet}": {
+			"get": {
+				"operationId": "GetTokens",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PutResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"reason": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"reason"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "tokenSet",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "version",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "PutTokens",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PutResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Validation Failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateErrorJSON"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"reason": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"reason"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "tokenSet",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PutRequest"
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"operationId": "PostTokens",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "tokenSet",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PostRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "https://localhost:8000/"
+		}
+	]
+}

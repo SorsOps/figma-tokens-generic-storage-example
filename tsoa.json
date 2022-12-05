@@ -1,15 +1,13 @@
 {
-    "entryFile": "src/index.ts",
-    "controllerPathGlobs": [
-        "src/controllers/*.ts"
-    ],
-    "noImplicitAdditionalProperties": "ignore",
-    "spec": {
-        "host": "localhost:8000",
-        "outputDirectory": "public",
-        "specVersion": 3
-    },
-    "routes": {
-        "routesDir": "src/routes"
-    }
+	"entryFile": "src/index.ts",
+	"controllerPathGlobs": ["src/controllers/*.ts"],
+	"noImplicitAdditionalProperties": "ignore",
+	"spec": {
+		"host": "localhost:8000",
+		"outputDirectory": "public",
+		"specVersion": 3
+	},
+	"routes": {
+		"routesDir": "src/routes"
+	}
 }

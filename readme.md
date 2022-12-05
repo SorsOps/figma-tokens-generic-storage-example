@@ -7,7 +7,7 @@ Internally it uses SQLite as the storage as this is a toy example.
 ## Quickstart
 
 ```sh
-npm ci 
+npm ci
 npm run start
 ```
 

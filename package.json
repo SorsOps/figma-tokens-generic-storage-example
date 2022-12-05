@@ -8,7 +8,7 @@
     "build": "tsc -p ./tsconfig-dist.json",
     "prestart": "npm run swagger && npm run routes",
     "routes": "tsoa routes",
-    "develop": "ts-node ./src/index.ts",
+    "dev": "ts-node ./src/index.ts",
     "start": "ts-node ./src/index.ts",
     "test": "jest --config=./jest.config.js",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",

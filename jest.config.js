@@ -7,9 +7,7 @@ module.exports = {
 		'!<rootDir>/config/**'
 	],
 	coverageReporters: ['json'],
-	coveragePathIgnorePatterns: [
-		'!*.d.ts'
-	],
+	coveragePathIgnorePatterns: ['!*.d.ts'],
 	moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
 	moduleNameMapper: {
 		// Yes this needs to be first. Jest is very stupid when it comes to the correct ordering of module name mapping.
@@ -19,10 +17,9 @@ module.exports = {
 			'<rootDir>/tests/__mocks__/file-mock.js',
 		'.+\\.(css|less|scss|sass|styl)$': 'identity-obj-proxy',
 		prefix: '<rootDir>/'
-
 	},
 	transform: {
-		'^.+\\.(ts|tsx)$': 'ts-jest',
+		'^.+\\.(ts|tsx)$': 'ts-jest'
 	},
 	reporters: [
 		'default',

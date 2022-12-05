@@ -5,9 +5,10 @@
   "description": "Example of a generic versioned storage endpoint for Figma Tokens",
   "main": "index.js",
   "scripts": {
-    "build":"tsc -p ./tsconfig-dist.json",
+    "build": "tsc -p ./tsconfig-dist.json",
     "prestart": "npm run swagger && npm run routes",
     "routes": "tsoa routes",
+    "dev": "ts-node ./src/index.ts",
     "start": "ts-node ./src/index.ts",
     "test": "jest --config=./jest.config.js",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
@@ -33,6 +34,7 @@
   },
   "homepage": "https://github.com/andrewx82/figma-tokens-generic-storage-example#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
     "sqlite": "^4.1.2",

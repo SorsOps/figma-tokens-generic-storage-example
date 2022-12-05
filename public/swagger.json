@@ -20,7 +20,10 @@
 						"$ref": "#/components/schemas/Tokens"
 					},
 					"$themes": {
-						"$ref": "#/components/schemas/Tokens"
+						"items": {
+							"$ref": "#/components/schemas/Tokens"
+						},
+						"type": "array"
 					},
 					"version": {
 						"type": "string",
@@ -32,11 +35,7 @@
 						"description": "The date submitted in unix time"
 					}
 				},
-				"required": [
-					"values",
-					"version",
-					"updatedAt"
-				],
+				"required": ["values", "version", "updatedAt"],
 				"type": "object",
 				"additionalProperties": true
 			},
@@ -44,9 +43,7 @@
 				"properties": {
 					"message": {
 						"type": "string",
-						"enum": [
-							"Validation failed"
-						],
+						"enum": ["Validation failed"],
 						"nullable": false
 					},
 					"details": {
@@ -55,10 +52,7 @@
 						"type": "object"
 					}
 				},
-				"required": [
-					"message",
-					"details"
-				],
+				"required": ["message", "details"],
 				"type": "object",
 				"additionalProperties": true
 			},
@@ -69,7 +63,10 @@
 						"description": "The token set"
 					},
 					"$themes": {
-						"$ref": "#/components/schemas/Tokens",
+						"items": {
+							"$ref": "#/components/schemas/Tokens"
+						},
+						"type": "array",
 						"description": "The themes associated with the token set"
 					},
 					"updatedAt": {
@@ -89,11 +86,7 @@
 						"description": "The version of the plugin that pushed the values"
 					}
 				},
-				"required": [
-					"values",
-					"updatedAt",
-					"version"
-				],
+				"required": ["values", "updatedAt", "version"],
 				"type": "object",
 				"additionalProperties": true
 			},
@@ -109,10 +102,7 @@
 						"description": "When the set was created"
 					}
 				},
-				"required": [
-					"created",
-					"updatedAt"
-				],
+				"required": ["created", "updatedAt"],
 				"type": "object",
 				"additionalProperties": true
 			},
@@ -123,7 +113,10 @@
 						"description": "The initially populated token set"
 					},
 					"$themes": {
-						"$ref": "#/components/schemas/Tokens",
+						"items": {
+							"$ref": "#/components/schemas/Tokens"
+						},
+						"type": "array",
 						"description": "The themes associated with the token set"
 					},
 					"version": {
@@ -143,9 +136,7 @@
 						"description": "The time at which the changes were made"
 					}
 				},
-				"required": [
-					"version"
-				],
+				"required": ["version"],
 				"type": "object",
 				"additionalProperties": true
 			}
@@ -189,9 +180,7 @@
 											"type": "string"
 										}
 									},
-									"required": [
-										"reason"
-									],
+									"required": ["reason"],
 									"type": "object"
 								}
 							}
@@ -251,9 +240,7 @@
 											"type": "string"
 										}
 									},
-									"required": [
-										"reason"
-									],
+									"required": ["reason"],
 									"type": "object"
 								}
 							}

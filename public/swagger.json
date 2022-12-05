@@ -20,7 +20,10 @@
 						"$ref": "#/components/schemas/Tokens"
 					},
 					"$themes": {
-						"$ref": "#/components/schemas/Tokens"
+						"items": {
+							"$ref": "#/components/schemas/Tokens"
+						},
+						"type": "array"
 					},
 					"version": {
 						"type": "string",
@@ -69,7 +72,10 @@
 						"description": "The token set"
 					},
 					"$themes": {
-						"$ref": "#/components/schemas/Tokens",
+						"items": {
+							"$ref": "#/components/schemas/Tokens"
+						},
+						"type": "array",
 						"description": "The themes associated with the token set"
 					},
 					"updatedAt": {
@@ -123,7 +129,10 @@
 						"description": "The initially populated token set"
 					},
 					"$themes": {
-						"$ref": "#/components/schemas/Tokens",
+						"items": {
+							"$ref": "#/components/schemas/Tokens"
+						},
+						"type": "array",
 						"description": "The themes associated with the token set"
 					},
 					"version": {

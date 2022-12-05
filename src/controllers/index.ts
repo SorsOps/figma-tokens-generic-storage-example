@@ -1,10 +1,11 @@
-import { Get, Put, Post, Route, Body, Query, Response, Controller, Res, TsoaResponse } from "tsoa";
+/* eslint-disable new-cap */
+import { Body, Controller, Get, Post, Put, Query, Res, Response, Route, TsoaResponse } from 'tsoa';
 
-import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
+import sqlite3 from 'sqlite3';
 
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
 
 type Tokens = Record<string, any>
 
@@ -16,7 +17,7 @@ interface PutRequest {
     /**
      * The themes associated with the token set
      */
-    $themes?: Tokens,
+    $themes?: Array<Tokens>,
     /**
      * The time at which the changes were made
      */
@@ -30,7 +31,7 @@ interface PutRequest {
 interface PutResponse {
 
     values: Tokens,
-    $themes?: Tokens,
+    $themes?: Array<Tokens>,
     /**
      * The version of the plugin that pushed the values
      */
@@ -49,7 +50,7 @@ interface PostRequest {
     /**
      * The themes associated with the token set
      */
-    $themes?: Tokens,
+    $themes?: Array<Tokens>,
     /**
      * The version of the plugin that pushed the values
      */
@@ -73,25 +74,26 @@ interface PostResponse {
 }
 
 interface ValidateErrorJSON {
-    message: "Validation failed";
+    message: 'Validation failed';
     details: { [name: string]: unknown };
 }
 
 // We are going to completely seperate Token sets by DBs
 
-@Route(":tokenSet")
+@Route(':tokenSet')
 export class TokensController extends Controller {
-    @Get("/")
+
+    @Get('/')
     public async getTokens(
         tokenSet: string,
         @Res() notFoundResponse: TsoaResponse<404, { reason: string }>,
-        @Query() version?: string,
+        @Query() version?: string
 
     ): Promise<PutResponse> {
 
         const filePath = path.join(__dirname, `../../db/${tokenSet}.db`);
         if (!fs.existsSync(filePath)) {
-            return notFoundResponse(404, { reason: "Token set does not exist" });
+            return notFoundResponse(404, { reason: 'Token set does not exist' });
         }
 
         const db = await open({
@@ -113,7 +115,7 @@ export class TokensController extends Controller {
         }
 
         if (!response) {
-            return notFoundResponse(404, { reason: "Version requested does not exist" });
+            return notFoundResponse(404, { reason: 'Version requested does not exist' });
         }
 
 
@@ -124,8 +126,8 @@ export class TokensController extends Controller {
             updatedAt: new Date(response.updatedAt).getTime()
         };
     }
-    @Put("/")
-    @Response<ValidateErrorJSON>(400, "Validation Failed")
+    @Put('/')
+    @Response<ValidateErrorJSON>(400, 'Validation Failed')
     public async putTokens(tokenSet: string,
         @Body() requestBody: PutRequest,
         @Res() notFoundResponse: TsoaResponse<404, { reason: string }>
@@ -134,7 +136,7 @@ export class TokensController extends Controller {
 
         const filePath = path.join(__dirname, `../../db/${tokenSet}.db`);
         if (!fs.existsSync(filePath)) {
-            return notFoundResponse(404, { reason: "Token set does not exist" });
+            return notFoundResponse(404, { reason: 'Token set does not exist' });
         }
         const db = await open({
             //Using an anonymous db
@@ -157,7 +159,7 @@ export class TokensController extends Controller {
             updatedAt: new Date(requestBody.updatedAt).getTime()
         };
     }
-    @Post("/")
+    @Post('/')
     public async postTokens(tokenSet: string,
         @Body() requestBody: PostRequest
     ): Promise<PostResponse> {
@@ -167,7 +169,7 @@ export class TokensController extends Controller {
 
         const filePath = path.join(__dirname, `../../db/${tokenSet}.db`);
 
-    
+
         if (!fs.existsSync(filePath)) {
             created = true;
         }

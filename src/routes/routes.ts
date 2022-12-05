@@ -24,7 +24,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "values": {"ref":"Tokens","required":true},
-            "$themes": {"ref":"Tokens"},
+            "$themes": {"dataType":"array","array":{"dataType":"refAlias","ref":"Tokens"}},
             "version": {"dataType":"string","required":true},
             "updatedAt": {"dataType":"double","required":true},
         },
@@ -44,7 +44,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "values": {"ref":"Tokens","required":true},
-            "$themes": {"ref":"Tokens"},
+            "$themes": {"dataType":"array","array":{"dataType":"refAlias","ref":"Tokens"}},
             "updatedAt": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}],"required":true},
             "version": {"dataType":"string","required":true},
         },
@@ -64,7 +64,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "values": {"ref":"Tokens"},
-            "$themes": {"ref":"Tokens"},
+            "$themes": {"dataType":"array","array":{"dataType":"refAlias","ref":"Tokens"}},
             "version": {"dataType":"string","required":true},
             "updatedAt": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
         },
@@ -151,12 +151,14 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
+                console.log(TokensController, new TokensController())
                 const controller = new TokensController();
 
 
               const promise = controller.postTokens.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
+    
                 return next(err);
             }
         });

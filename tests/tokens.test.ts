@@ -23,7 +23,7 @@ describe('Tokens', () => {
 			);
 			expect(res.statusCode).toBe(200);
 			expect(JSON.parse(res.text)).toEqual({
-				$themes: {},
+				$themes: [],
 				updatedAt: 1669292463000,
 				values: {
 					foo: 'bar'

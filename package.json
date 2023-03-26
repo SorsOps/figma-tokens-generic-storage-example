@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andrewx82/figma-tokens-generic-storage-example.git"
+    "url": "git+https://github.com/SorsOps/figma-tokens-generic-storage-example.git"
   },
   "keywords": [
     "Figma",
@@ -27,12 +27,12 @@
     "Example",
     "Boilerplate"
   ],
-  "author": "Andrew@x82.io",
+  "author": "andrew@hyma.io",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andrewx82/figma-tokens-generic-storage-example/issues"
+    "url": "https://github.com/SorsOps/figma-tokens-generic-storage-example/issues"
   },
-  "homepage": "https://github.com/andrewx82/figma-tokens-generic-storage-example#readme",
+  "homepage": "https://github.com/SorsOps/figma-tokens-generic-storage-example#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",

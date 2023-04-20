@@ -167,7 +167,7 @@ export class TokensController extends Controller {
 			{
 				':updated': new Date(requestBody.updatedAt).getTime(),
 				':json': JSON.stringify(requestBody.values),
-				':themes': JSON.stringify(requestBody.$themes || {}),
+				':themes': JSON.stringify(requestBody.$themes || []),
 				':version': requestBody.version
 			}
 		);
@@ -206,13 +206,14 @@ export class TokensController extends Controller {
 				'CREATE Table Tokens (updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, json TEXT, themes TEXT, pluginVersion varchar(255),PRIMARY KEY (updatedAt));'
 			);
 
+
 			if (requestBody.values) {
 				await db.run(
-					'INSERT INTO Tokens (json, themes, pluginVersion) VALUES (:updated,:json,:themes,:version);',
+					'INSERT INTO Tokens (updatedAt, json, themes, pluginVersion) VALUES (:updated,:json,:themes,:version);',
 					{
 						':updated': updatedAt.getTime(),
 						':json': JSON.stringify(requestBody.values),
-						':themes': JSON.stringify(requestBody.$themes || {}),
+						':themes': JSON.stringify(requestBody.$themes || []),
 						':version': requestBody.version
 					}
 				);
@@ -223,6 +224,7 @@ export class TokensController extends Controller {
 			const result = await db.get(
 				'SELECT updatedAt FROM Tokens  GROUP BY updatedAt  ORDER BY max(updatedAt) LIMIT 1;'
 			);
+			console.log(result)
 			updatedAt = new Date(result.updatedAt);
 		}
 

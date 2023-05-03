@@ -114,7 +114,7 @@ export class TokensController extends Controller {
 		if (!version) {
 			// Get the latest
 			response = await db.get(
-				'SELECT updatedAt, json, themes, pluginVersion FROM Tokens GROUP BY updatedAt  ORDER BY max(updatedAt) LIMIT 1; '
+				'SELECT updatedAt, json, themes, pluginVersion FROM Tokens GROUP BY updatedAt  ORDER BY updatedAt DESC LIMIT 1; '
 			);
 		} else {
 			//Attempt to retrieve a specific version
@@ -222,9 +222,8 @@ export class TokensController extends Controller {
 			//Request the latest
 
 			const result = await db.get(
-				'SELECT updatedAt FROM Tokens  GROUP BY updatedAt  ORDER BY max(updatedAt) LIMIT 1;'
+				'SELECT updatedAt FROM Tokens  GROUP BY updatedAt  ORDER BY updatedAt DESC LIMIT 1;'
 			);
-			console.log(result)
 			updatedAt = new Date(result.updatedAt);
 		}
 
